@@ -31,11 +31,13 @@ int main(int argc, char* argv[]) {
   const auto gsRider = std::make_shared<GSRider>(L, std::make_shared<GSRiderSim>());
   OdometryAccumulator odomAcc(init_x, init_y, init_th);
 
+  // Velocity command callback
   boost::function<void (const geometry_msgs::Twist&)> velCB = [&gsRider] (const auto& msg) { 
     ROS_INFO("I heard: [%f, %f, %f]", msg.linear.x, msg.linear.y, msg.angular.z);
     gsRider->setVelocity(msg.linear.x, msg.angular.z);
   };
-  
+
+  // Transform Broadcast
   tf::TransformBroadcaster br;
   auto tfBroadCast = [&br, &base_link_name] (const std::tuple<double, double, double>& pose) {
     double x, y, th;

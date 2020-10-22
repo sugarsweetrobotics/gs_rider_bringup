@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<launch>
+  <node name="esp32" pkg="rosserial_python" type="serial_node.py" args="/dev/ttyUSB1" />
+
+  <node name="gmapping" pkg="gmapping" type="slam_gmapping">
+
+
+  </node>
+  
+  <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+  <include file="$(find realsense2_camera)/launch/rs_t265.launch" />
+  <node name="laser_static_tf" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 base_link laser 100" />
+
+  <node name="rplider_static_tf" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 base_link rplidar 100" />
+
+  <node name="realsense_static_tf" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 base_link camera_link 100" />    
+
+</launch>
