@@ -21,14 +21,23 @@ int main(int argc, char* argv[]) {
   double init_x, init_y, init_th;
   double loopHz = 10.0;
   std::string base_link_name = "base_link";
+  std::string use_sim = "true";
   nodeHandle.param<double>("rider_length", L, 1.0);
   nodeHandle.param<double>("control_rate", loopHz, 10.0);
   nodeHandle.param<double>("init_x", init_x, 0.0);
   nodeHandle.param<double>("init_y", init_y, 0.0);
   nodeHandle.param<double>("init_th", init_th, 0.0);
   nodeHandle.param<std::string>("base_link_name", base_link_name, "base_link");
+  nodeHandle.param<std::string>("use_sim", use_sim, "true");
+
   
-  const auto gsRider = std::make_shared<GSRider>(L, std::make_shared<GSRiderSim>());
+  std::shared_ptr<GSRider> gsRider;
+  if (use_sim == "true") {
+    gsRider = std::make_shared<GSRider>(L, std::make_shared<GSRiderSim>());
+  } else {
+    gsRider = std::make_shared<GSRider>(L, std::make_shared<GSRiderImpl>(&nodeHandle));
+  }
+  
   OdometryAccumulator odomAcc(init_x, init_y, init_th);
 
   // Velocity command callback

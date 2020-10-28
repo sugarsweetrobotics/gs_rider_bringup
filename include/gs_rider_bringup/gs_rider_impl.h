@@ -2,6 +2,7 @@
 
 
 #include <ros/ros.h>
+#include "gs_rider_bringup/gs_rider_core.h"
 
 namespace gs {
 

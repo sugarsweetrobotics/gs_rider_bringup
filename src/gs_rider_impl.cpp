@@ -1,15 +1,12 @@
 #include <ros/ros.h>
+#include <std_msgs/Int32.h>
 
-
-#include "gs_rider_bringup/gs_rider_core.h"
-
-
-
+#include "gs_rider_bringup/gs_rider_impl.h"
 
 using namespace gs;
 
 
-GSRiderImpl::GSRiderImpl(ros::NodeHandle* nh) : nodeHandle_(nh), l_count_(0), r_count_(0), init_l_count_(false), init_r_count_(false), distance_to_count_(0.003) {
+GSRiderImpl::GSRiderImpl(ros::NodeHandle* nh) : nodeHandle_(nh), l_count_(0), r_count_(0), init_(false), distance_to_count_(0.003) {
 
   boost::function<void (const std_msgs::Int32&)> l_count_CB = [this] (const auto& msg) { 
     this->set_l_count(msg.data);
