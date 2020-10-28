@@ -1,5 +1,6 @@
 #include <ros/ros.h>
 #include <std_msgs/Int32.h>
+#include <std_msgs/UInt16.h>
 
 #include "gs_rider_bringup/gs_rider_impl.h"
 
@@ -18,10 +19,10 @@ GSRiderImpl::GSRiderImpl(ros::NodeHandle* nh) : nodeHandle_(nh), l_count_(0), r_
   l_count_sub_ = nodeHandle_->subscribe<std_msgs::Int32>("esp32_row/wheel_lcount", 1000, l_count_CB);
   r_count_sub_ = nodeHandle_->subscribe<std_msgs::Int32>("esp32_row/wheel_lcount", 1000, r_count_CB);
 
-  boost::function<void (const std_msgs::Int32&)> rc_ch1_CB = [this] (const auto& msg) { 
+  boost::function<void (const std_msgs::UInt16&)> rc_ch1_CB = [this] (const auto& msg) { 
     this->set_rc_ch1(msg.data);
   };
-  rc_ch1_sub_ = nodeHandle_->subscribe<std_msgs::Int32>("esp32_row/rc_ch1in", 1000, rc_ch1_CB);
+  rc_ch1_sub_ = nodeHandle_->subscribe<std_msgs::UInt16>("esp32_row/rc_ch1in", 1000, rc_ch1_CB);
 }
 
 GSRiderImpl::~GSRiderImpl() {}

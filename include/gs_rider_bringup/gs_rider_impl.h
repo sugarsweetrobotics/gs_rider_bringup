@@ -24,7 +24,7 @@ namespace gs {
     ros::Subscriber r_count_sub_;
     ros::Subscriber rc_ch1_sub_;
 
-    int32_t rc_ch1in_pwm_;
+    uint16_t rc_ch1in_pwm_;
   public:
     GSRiderImpl(ros::NodeHandle* nh);
     virtual ~GSRiderImpl();
@@ -32,7 +32,7 @@ namespace gs {
   public:
     void set_l_count(const int32_t count) { l_count_ = count; }
     void set_r_count(const int32_t count) { r_count_ = count; }
-    void set_rc_ch1(const int32_t count) { rc_ch1in_pwm_ = count; }
+    void set_rc_ch1(const uint16_t count) { rc_ch1in_pwm_ = count; }
   public:
     /**
      * @returns [m]
