@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
   nodeHandle.param<double>("init_y", init_y, 0.0);
   nodeHandle.param<double>("init_th", init_th, 0.0);
   nodeHandle.param<std::string>("base_link_name", base_link_name, "base_link");
-  nodeHandle.param<std::string>("use_sim", use_sim, "true");
+  nodeHandle.param<std::string>("use_sim", use_sim, "false");
 
   
   std::shared_ptr<GSRider> gsRider;
