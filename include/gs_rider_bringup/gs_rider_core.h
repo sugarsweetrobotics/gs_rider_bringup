@@ -9,7 +9,7 @@ namespace gs {
 
   class GSRiderCore {
   public:
-
+    
     virtual ~GSRiderCore() {}
 
   public:
@@ -40,6 +40,7 @@ namespace gs {
      */
     virtual void update(const double dt) = 0;
   };
+
 
 
 }

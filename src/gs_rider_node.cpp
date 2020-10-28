@@ -8,7 +8,7 @@
 #include "gs_rider_bringup/gs_rider.h"
 #include "gs_rider_bringup/gs_rider_sim.h"
 #include "gs_rider_bringup/gs_rider_kinematics.h"
-
+#include "gs_rider_bringup/gs_rider_impl.h"
 using namespace gs;
 
 
