@@ -24,6 +24,9 @@ namespace gs {
     ros::Subscriber r_count_sub_;
     ros::Subscriber rc_ch1_sub_;
 
+    ros::Publisher  rc_ch1_pub_;
+    ros::Publisher  rc_ch4_pub_;
+    ros::Publisher  throttle_pub_;
     uint16_t rc_ch1in_pwm_;
   public:
     GSRiderImpl(ros::NodeHandle* nh);

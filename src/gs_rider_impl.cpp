@@ -23,6 +23,11 @@ GSRiderImpl::GSRiderImpl(ros::NodeHandle* nh) : nodeHandle_(nh), l_count_(0), r_
     this->set_rc_ch1(msg.data);
   };
   rc_ch1_sub_ = nodeHandle_->subscribe<std_msgs::UInt16>("esp32_row/rc_ch1in", 1000, rc_ch1_CB);
+
+
+  rc_ch1_pub_ = nodeHandle_->advertise<std_msgs::UInt16>("esp32_row/command/rc_ch1out", 1000);
+  rc_ch4_pub_ = nodeHandle_->advertise<std_msgs::UInt16>("esp32_row/command/rc_ch4out", 1000);
+  throttle_pub_ = nodeHandle_->advertise<std_msgs::Int32>("esp32_row/command/throttle", 1000);
 }
 
 GSRiderImpl::~GSRiderImpl() {}
@@ -64,12 +69,21 @@ double GSRiderImpl::getMoveVelocity() const {
 /**
  * @param vx [m/sec]
  */
-void GSRiderImpl::setMoveVelocity(const double vx) {}
+void GSRiderImpl::setMoveVelocity(const double vx) {
+  std_msgs::Int32 throttle;
+  throttle.data = 0;
+  // throttle_pub_.publish(throttle);
+}
 
 /**
  * @param alpha [radian]
  */
-void GSRiderImpl::setSteerAngle(const double alpha) {}
+void GSRiderImpl::setSteerAngle(const double alpha) {
+  std_msgs::UInt16 rc;
+  rc.data = 0;
+  //  rc_ch1_pub_.publish(rc);
+  //  rc_ch4_pub_.publish(rc);
+}
 
 /**
  * @param dt [sec]

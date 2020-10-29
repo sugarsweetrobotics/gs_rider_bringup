@@ -13,7 +13,6 @@ using namespace gs;
 
 
 int main(int argc, char* argv[]) {
-
   ros::init(argc, argv, "gs_rider");
   ros::NodeHandle nodeHandle;
   
