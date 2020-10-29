@@ -13,6 +13,8 @@ namespace gs {
     virtual ~GSRiderCore() {}
 
   public:
+
+    virtual void setThrottleGain(const double gain) = 0;
     /**
      * @returns [m]
      */

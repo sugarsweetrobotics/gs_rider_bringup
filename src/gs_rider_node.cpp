@@ -21,11 +21,13 @@ int main(int argc, char* argv[]) {
   double loopHz = 10.0;
   std::string base_link_name = "base_link";
   std::string use_sim = "true";
+  double throttle_gain = 0.01;
   nodeHandle.param<double>("rider_length", L, 1.0);
   nodeHandle.param<double>("control_rate", loopHz, 10.0);
   nodeHandle.param<double>("init_x", init_x, 0.0);
   nodeHandle.param<double>("init_y", init_y, 0.0);
   nodeHandle.param<double>("init_th", init_th, 0.0);
+  nodeHandle.param<double>("throttle_gain", throttle_gain, 0.01);
   nodeHandle.param<std::string>("base_link_name", base_link_name, "base_link");
   nodeHandle.param<std::string>("use_sim", use_sim, "false");
 

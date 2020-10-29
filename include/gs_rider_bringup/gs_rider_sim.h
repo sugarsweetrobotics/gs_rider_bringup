@@ -22,6 +22,10 @@ namespace gs {
 
   private:
 
+    virtual void setThrottleGain(const double gain) override {
+      // DO not nothing
+    }
+
     /**
      * @returns [m]
      */

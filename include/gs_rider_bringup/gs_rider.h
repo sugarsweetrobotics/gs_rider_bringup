@@ -23,8 +23,13 @@ namespace gs {
 
   public:
 
+    
     double getMoveVelocity() const { return riderCore_->getMoveVelocity(); }
     double getSteerAngle() const { return riderCore_->getSteerAngle(); }
+
+    void setThrottleGain(const double gain) {
+      riderCore_->setThrottleGain(gain);
+    }
     
     void setVelocity(const double vx, const double vtheta) {
       const double alpha = vx != 0.0 ? asin(vtheta * L_ / vx) : 0.0;

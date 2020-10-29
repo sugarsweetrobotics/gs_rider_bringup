@@ -7,7 +7,7 @@
 using namespace gs;
 
 
-GSRiderImpl::GSRiderImpl(ros::NodeHandle* nh) : nodeHandle_(nh), l_count_(0), r_count_(0), init_(false), distance_to_count_(0.003) {
+GSRiderImpl::GSRiderImpl(ros::NodeHandle* nh) : nodeHandle_(nh), l_count_(0), r_count_(0), init_(false), distance_to_count_(0.003), throttle_gain_(0.01) {
 
   boost::function<void (const std_msgs::Int32&)> l_count_CB = [this] (const auto& msg) { 
     this->set_l_count(msg.data);
@@ -59,7 +59,7 @@ double GSRiderImpl::getAndResetMoveDistance() {
  * @returns [radian]
  */
 double GSRiderImpl::getSteerAngle() const {
-  return 1522.0 - rc_ch1in_pwm_ / 450.0;
+  return (1522.0 - rc_ch1in_pwm_) / 450.0;
 }
 
 double GSRiderImpl::getMoveVelocity() const {
@@ -71,8 +71,8 @@ double GSRiderImpl::getMoveVelocity() const {
  */
 void GSRiderImpl::setMoveVelocity(const double vx) {
   std_msgs::Int32 throttle;
-  throttle.data = 0;
-  // throttle_pub_.publish(throttle);
+  throttle.data = throttle_gain_ * vx;
+  throttle_pub_.publish(throttle);
 }
 
 /**
@@ -80,9 +80,9 @@ void GSRiderImpl::setMoveVelocity(const double vx) {
  */
 void GSRiderImpl::setSteerAngle(const double alpha) {
   std_msgs::UInt16 rc;
-  rc.data = 0;
-  //  rc_ch1_pub_.publish(rc);
-  //  rc_ch4_pub_.publish(rc);
+  rc.data = - alpha * 450.0 + 1522.0;
+  rc_ch1_pub_.publish(rc);
+  rc_ch4_pub_.publish(rc);
 }
 
 /**

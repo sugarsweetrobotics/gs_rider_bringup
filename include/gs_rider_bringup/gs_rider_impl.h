@@ -28,6 +28,8 @@ namespace gs {
     ros::Publisher  rc_ch4_pub_;
     ros::Publisher  throttle_pub_;
     uint16_t rc_ch1in_pwm_;
+
+    double throttle_gain_;
   public:
     GSRiderImpl(ros::NodeHandle* nh);
     virtual ~GSRiderImpl();
@@ -36,7 +38,13 @@ namespace gs {
     void set_l_count(const int32_t count) { l_count_ = count; }
     void set_r_count(const int32_t count) { r_count_ = count; }
     void set_rc_ch1(const uint16_t count) { rc_ch1in_pwm_ = count; }
+    void set_throttle_gain(const double gain) { throttle_gain_ = gain; }
   public:
+
+    virtual void setThrottleGain(const double gain) override {
+      set_throttle_gain(gain);
+    }
+    
     /**
      * @returns [m]
      */
